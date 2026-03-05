@@ -91,7 +91,7 @@ function resetTextSize () {
 
 
 
-// CHANGES TEXT SIZE
+// CHANGES TEXT SIZE AND COLOR
 function toggleDemo9() {
     const el = document.getElementById('demo9');
     if (el.style.color === 'blue') {
@@ -101,4 +101,9 @@ function toggleDemo9() {
         el.style.color    = 'blue';
         el.style.fontSize = '120px';
     }
+}
+
+
+function toggledemo10() {
+    document.getElementById("demo10").style.color= "yellow"
 }
