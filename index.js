@@ -107,3 +107,86 @@ function toggleDemo9() {
 function toggledemo10() {
     document.getElementById("demo10").style.color= "yellow"
 }
+
+function increasecounter() {
+    const counter = document.getElementById("counter");
+    counter.innerHTML = parseInt(counter.innerHTML) + 1;
+}
+function lesscounter() {
+    const counter = document.getElementById("counter");
+    counter.innerHTML = parseInt(counter.innerHTML) - 1;
+}
+function resetcounter() {
+    document.getElementById("counter").innerHTML = "0";
+}
+
+let timerInterval = null;
+let timeLeft = 0;
+
+function startTimer() {
+    const input = parseInt(document.getElementById("timerInput").value);
+    
+    if (isNaN(input) || input <= 0) {
+        alert("Bitte eine gültige Zahl eingeben!");
+        return;
+    }
+    
+    timeLeft = input;
+    document.getElementById("timerDisplay").innerHTML = timeLeft;
+    
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timerDisplay").innerHTML = timeLeft;
+        
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            alert("Zeit abgelaufen!");
+        }
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    document.getElementById("timerDisplay").innerHTML = "0";
+}
+
+
+let stopwatchInterval = null;
+let stopwatchTime = 0; // in Millisekunden
+
+function startStopwatch() {
+    if (stopwatchInterval === null) {
+        stopwatchInterval = setInterval(() => {
+            stopwatchTime += 10;
+            updateStopwatchDisplay();
+        }, 10);
+    }
+}
+
+function stopStopwatch() {
+    clearInterval(stopwatchInterval);
+    stopwatchInterval = null;
+}
+
+function resetStopwatch() {
+    clearInterval(stopwatchInterval);
+    stopwatchInterval = null;
+    stopwatchTime = 0;
+    document.getElementById("stopwatchDisplay").innerHTML = "00:00:00:00";
+}
+
+function updateStopwatchDisplay() {
+    const totalSeconds = Math.floor(stopwatchTime / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    const milliseconds = Math.floor((stopwatchTime % 1000) / 10);
+    
+    const display = 
+        (hours < 10 ? "0" : "") + hours + ":" +
+        (minutes < 10 ? "0" : "") + minutes + ":" +
+        (seconds < 10 ? "0" : "") + seconds + ":" +
+        (milliseconds < 10 ? "0" : "") + milliseconds;
+    
+    document.getElementById("stopwatchDisplay").innerHTML = display;
+}
